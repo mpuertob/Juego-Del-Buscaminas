@@ -1,7 +1,7 @@
 package Modelo;
 
 public enum Tipo {
-	bomba(-1), vacia(0), numero(1);
+	bomba(-1), vacia(0), numeroDeMinasAlrededor(1);
 	private int valor;
 
 	private Tipo(int valor) {
