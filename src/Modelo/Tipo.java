@@ -1,7 +1,7 @@
 package Modelo;
 
 public enum Tipo {
-	bomba(-1), vacia(0), numeroDeMinasAlrededor(1);
+	bomba(-1), vacia(0);
 	private int valor;
 
 	private Tipo(int valor) {
@@ -12,9 +12,7 @@ public enum Tipo {
 		return valor;
 	}
 
-	// se le cambia el valor en el caso de que la casilla tenga un número de bombas
-	// alrededor
-	// diferente de uno
+	
 	public void setValor(int valor) {
 		this.valor = valor;
 	}

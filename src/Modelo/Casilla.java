@@ -17,8 +17,12 @@ public class Casilla {
 		return coordenada;
 	}
 
-	public void setCoordenada(Coordenada coordenada) {
-		this.coordenada = coordenada;
+	public int getX() {
+		return coordenada.getX();
+	}
+
+	public int getY() {
+		return coordenada.getY();
 	}
 
 	public Tipo getTipo() {
@@ -39,6 +43,14 @@ public class Casilla {
 
 	public void setDesvelada(boolean desvelada) {
 		this.desvelada = desvelada;
+	}
+
+	public int getValor() {
+		return tipo.getValor();
+	}
+
+	public void setValor(int valor) {
+		tipo.setValor(valor);
 	}
 
 }

@@ -1,21 +1,21 @@
 package Modelo;
 
 public class Tablero {
-	private int dimension;
+	private Dificultad dificultad;
 	private Casilla[][] casilla;
 
-	public Tablero(int dimension) {
+	public Tablero(Dificultad dificultad) {
 		super();
-		this.dimension = dimension;
-		this.casilla = new Casilla[dimension][dimension];
+		this.dificultad = dificultad;
+		this.casilla = new Casilla[this.dificultad.getTamanoDelTablero()][this.dificultad.getTamanoDelTablero()];
 	}
 
-	public int getDimension() {
-		return dimension;
+	public Dificultad getDificultad() {
+		return dificultad;
 	}
 
-	public void setDimension(int dimension) {
-		this.dimension = dimension;
+	public void setDificultad(Dificultad dificultad) {
+		this.dificultad = dificultad;
 	}
 
 	public Casilla[][] getCasilla() {
