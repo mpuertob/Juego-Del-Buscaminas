@@ -1,5 +1,7 @@
 package Modelo;
 
+import utiles.Utiles;
+
 public class Tablero {
 
 	private Casilla[][] casillas;
@@ -17,7 +19,17 @@ public class Tablero {
 	}
 
 	private void colocarMinas(int lado, int numeroBombas) {
-		// TODO Auto-generated method stub
+		int posicionAleatoriaX = Utiles.dameNumero(lado);
+		int posicionAleatoriaY = Utiles.dameNumero(lado);
+		do {
+			if (!this.casillas[posicionAleatoriaX][posicionAleatoriaY].isMina()) {
+				this.casillas[posicionAleatoriaX][posicionAleatoriaY].setMina(true);
+				numeroBombas--;
+			} else {
+				posicionAleatoriaX = Utiles.dameNumero(lado);
+				posicionAleatoriaY = Utiles.dameNumero(lado);
+			}
+		} while (numeroBombas != 0);
 
 	}
 
