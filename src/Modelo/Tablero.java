@@ -59,4 +59,23 @@ public class Tablero {
 		return casillas;
 	}
 
+	public boolean marcarCasilla(Coordenada coordenada) {
+		boolean respuesta = false;
+		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];
+		if (casilla.isVelada()) {
+			casilla.setMarcada(true);
+			respuesta = true;
+		}
+		return respuesta;
+	}
+
+	public boolean desmarcarCasilla(Coordenada coordenada) {
+		boolean respuesta = false;
+		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];
+		if (casilla.isVelada() && casilla.isMarcada()) {
+			casilla.setMarcada(false);
+			respuesta = true;
+		}
+		return respuesta;
+	}
 }
