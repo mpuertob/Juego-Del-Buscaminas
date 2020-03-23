@@ -62,7 +62,7 @@ public class Tablero {
 	public boolean marcarCasilla(Coordenada coordenada) {
 		boolean respuesta = false;
 		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];
-		if (casilla.isVelada()) {
+		if (casilla.isVelada()&& !casilla.isMarcada()) {
 			casilla.setMarcada(true);
 			respuesta = true;
 		}
