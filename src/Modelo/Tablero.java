@@ -43,4 +43,8 @@ public class Tablero {
 		return getCasilla(posicion).isMina();
 	}
 
+	public Casilla[][] getCasillas() {
+		return casillas;
+	}
+
 }
