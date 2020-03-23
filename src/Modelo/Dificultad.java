@@ -1,29 +1,16 @@
 package Modelo;
 
-public class Dificultad {
-	private int tamanoDelTablero;
-	private int numeroDeMinas;
+public enum Dificultad {
+	pequeno(5), medio(8), grande(12);
 
-	public Dificultad(int tamanoDelTablero, int numeroDeMinas) {
-		super();
-		this.tamanoDelTablero = tamanoDelTablero;
-		this.numeroDeMinas = numeroDeMinas;
+	private int lado;
+
+	private Dificultad(int lado) {
+		this.lado = lado;
 	}
 
-	public int getTamanoDelTablero() {
-		return tamanoDelTablero;
-	}
-
-	public void setTamanoDelTablero(int tamanoDelTablero) {
-		this.tamanoDelTablero = tamanoDelTablero;
-	}
-
-	public int getNumeroDeMinas() {
-		return numeroDeMinas;
-	}
-
-	public void setNumeroDeMinas(int numeroDeMinas) {
-		this.numeroDeMinas = numeroDeMinas;
+	public int getLado() {
+		return lado;
 	}
 
 }

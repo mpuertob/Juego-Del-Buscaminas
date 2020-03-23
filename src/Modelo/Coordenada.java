@@ -1,28 +1,30 @@
 package Modelo;
 
 public class Coordenada {
-	private int x, y;
+	//clases de apoyo
+	private int posX,posY;
 
-	public Coordenada(int x, int y) {
+	public Coordenada(int posX, int posY) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.posX = posX;
+		this.posY = posY;
 	}
 
-	public int getX() {
-		return x;
+	public int getPosX() {
+		return posX;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setPosX(int posX) {
+		this.posX = posX;
 	}
 
-	public int getY() {
-		return y;
+	public int getPosY() {
+		return posY;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
+	
 
 }

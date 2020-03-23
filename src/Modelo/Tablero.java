@@ -1,29 +1,44 @@
 package Modelo;
 
 public class Tablero {
-	private Dificultad dificultad;
-	private Casilla[][] casilla;
 
-	public Tablero(Dificultad dificultad) {
+	private Casilla[][] casillas;
+
+	public Tablero(int lado, int numeroBombas) {
 		super();
-		this.dificultad = dificultad;
-		this.casilla = new Casilla[this.dificultad.getTamanoDelTablero()][this.dificultad.getTamanoDelTablero()];
+		crearTablero(lado);
+		colocarMinas(lado,numeroBombas);
+		establecerMinasAlrededor();
+	}
+	
+	private void establecerMinasAlrededor() {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public Dificultad getDificultad() {
-		return dificultad;
+	private void colocarMinas(int lado, int numeroBombas) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void crearTablero(int lado) {
+		this.casillas=new Casilla[lado][lado];
+		// ahora hay que crear los objetos casilla
 	}
 
-	public void setDificultad(Dificultad dificultad) {
-		this.dificultad = dificultad;
+	//TODO antes era private
+	public Casilla getCasilla(Coordenada posicion) {
+		return casillas[posicion.getPosX()][posicion.getPosY()];
+	}
+	
+	private void setMina(Coordenada posicion, boolean bandera) {
+		getCasilla(posicion).setMina(bandera);
 	}
 
-	public Casilla[][] getCasilla() {
-		return casilla;
+	private boolean isMina(Coordenada posicion) {
+		return getCasilla(posicion).isMina();
 	}
 
-	public void setCasilla(Casilla[][] casilla) {
-		this.casilla = casilla;
-	}
-
+	
+	
 }

@@ -1,56 +1,46 @@
 package Modelo;
 
 public class Casilla {
-	private Coordenada coordenada;
-	private Tipo tipo;
-	private boolean marcada, desvelada;
 
-	public Casilla(Coordenada coordenada, Tipo tipo) {
-		super();
-		this.coordenada = coordenada;
-		this.tipo = tipo;
-		this.marcada = false;
-		this.desvelada = false;
+	//Desde mi punto de vista la coordenada no pertenece a la casilla
+	
+	private boolean mina=false;
+	private boolean velada=true;
+	private boolean marcada=false;
+	private int minasAlrededor=0;
+	
+	public Casilla() {
+		
 	}
-
-	public Coordenada getCoordenada() {
-		return coordenada;
+	public boolean isMina() {
+		return mina;
 	}
-
-	public int getX() {
-		return coordenada.getX();
+	public void setMina(boolean mina) {
+		this.mina = mina;
 	}
-
-	public int getY() {
-		return coordenada.getY();
+	public boolean isVelada() {
+		return velada;
 	}
-
-	public Tipo getTipo() {
-		return tipo;
+	public void setVelada(boolean velada) {
+		this.velada = velada;
 	}
-
 	public boolean isMarcada() {
 		return marcada;
 	}
-
 	public void setMarcada(boolean marcada) {
 		this.marcada = marcada;
 	}
-
-	public boolean isDesvelada() {
-		return desvelada;
+	public int getMinasAlrededor() {
+		return minasAlrededor;
 	}
-
-	public void setDesvelada(boolean desvelada) {
-		this.desvelada = desvelada;
+	public void setMinasAlrededor(int minasAlrededor) {
+		this.minasAlrededor = minasAlrededor;
 	}
-
-	public int getValor() {
-		return tipo.getValor();
+	@Override
+	public String toString() {
+		return String.valueOf(mina);
 	}
-
-	public void setValor(int valor) {
-		tipo.setValor(valor);
-	}
-
+	
+	
+	
 }
