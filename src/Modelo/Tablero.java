@@ -12,8 +12,21 @@ public class Tablero {
 		colocarMinas(lado, numeroBombas);
 	}
 
-	private void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
-		// TODO Auto-generated method stub
+	private void establecerMinasAlrededor(Coordenada posicionMinaCoordenada, int lado) {
+		int x = posicionMinaCoordenada.getPosX();
+		int y = posicionMinaCoordenada.getPosY();
+		for (int i = x - 1; i < x + 1; i++) {
+			for (int j = y - 1; j < y + 1; j++) {
+				Coordenada alrededor = new Coordenada(i, j);
+				// No tengo en cuenta la posicion que estoy comprobando
+				if (!alrededor.equals(posicionMinaCoordenada)) {
+					if (isDentroLimites(alrededor, lado) && !this.getCasilla(alrededor).isMina()) {
+						this.getCasilla(alrededor)
+								.setMinasAlrededor(this.getCasilla(alrededor).getMinasAlrededor() + 1);
+					}
+				}
+			}
+		}
 
 	}
 
@@ -23,18 +36,14 @@ public class Tablero {
 		do {
 			if (!this.casillas[posicionAleatoriaX][posicionAleatoriaY].isMina()) {
 				this.casillas[posicionAleatoriaX][posicionAleatoriaY].setMina(true);
+				Coordenada posicionMinaCoordenada = new Coordenada(posicionAleatoriaX, posicionAleatoriaY);
+				establecerMinasAlrededor(posicionMinaCoordenada, lado);
 				numeroBombas--;
 			} else {
 				posicionAleatoriaX = Utiles.dameNumero(lado);
 				posicionAleatoriaY = Utiles.dameNumero(lado);
 			}
 		} while (numeroBombas != 0);
-		// Una vez colocada la mina
-		// Tendremos una posicion que yo llamo 0,0 pero que será aleatoria
-		// en vuestro programa
-		// TODO
-		Coordenada posicionMinaCoordenada = new Coordenada(0, 0);
-		establecerMinasAlrededor(posicionMinaCoordenada);
 
 	}
 
@@ -83,5 +92,10 @@ public class Tablero {
 	public boolean desvelarCasilla(Coordenada coordenada) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	private boolean isDentroLimites(Coordenada alrededor, int lado) {
+		return alrededor.getPosX() >= 0 && alrededor.getPosX() < lado && alrededor.getPosY() >= 0
+				&& alrededor.getPosY() < lado;
 	}
 }
