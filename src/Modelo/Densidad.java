@@ -1,7 +1,7 @@
 package Modelo;
 
 public enum Densidad {
-	facil(10),dificil(20);
+	facil(10), dificil(20);
 	private int porcentaje;
 
 	private Densidad(int porcentaje) {
@@ -11,5 +11,5 @@ public enum Densidad {
 	public int getPorcentaje() {
 		return porcentaje;
 	}
-	
+
 }

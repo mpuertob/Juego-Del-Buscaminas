@@ -1,8 +1,8 @@
 package Modelo;
 
 public class Coordenada {
-	//clases de apoyo
-	private int posX,posY;
+	// clases de apoyo
+	private int posX, posY;
 
 	public Coordenada(int posX, int posY) {
 		super();
@@ -25,6 +25,18 @@ public class Coordenada {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean retorno = false;
+		if (obj != null) {
+			retorno = this.equals(obj);
+			if (!retorno && obj instanceof Coordenada) {
+				Coordenada coordenada = (Coordenada) obj;
+				retorno = this.getPosX() == coordenada.getPosX() && this.getPosY() == coordenada.getPosY();
+			}
+		}
+		return retorno;
+	}
 
 }

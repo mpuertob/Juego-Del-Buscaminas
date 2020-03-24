@@ -10,10 +10,9 @@ public class Tablero {
 		super();
 		crearTablero(lado);
 		colocarMinas(lado, numeroBombas);
-		establecerMinasAlrededor();
 	}
 
-	private void establecerMinasAlrededor() {
+	private void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
 		// TODO Auto-generated method stub
 
 	}
@@ -30,6 +29,12 @@ public class Tablero {
 				posicionAleatoriaY = Utiles.dameNumero(lado);
 			}
 		} while (numeroBombas != 0);
+		// Una vez colocada la mina
+		// Tendremos una posicion que yo llamo 0,0 pero que será aleatoria
+		// en vuestro programa
+		// TODO
+		Coordenada posicionMinaCoordenada = new Coordenada(0, 0);
+		establecerMinasAlrededor(posicionMinaCoordenada);
 
 	}
 
@@ -62,7 +67,7 @@ public class Tablero {
 	public boolean marcarCasilla(Coordenada coordenada) {
 		boolean respuesta = false;
 		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];
-		if (casilla.isVelada()&& !casilla.isMarcada()) {
+		if (casilla.isVelada() && !casilla.isMarcada()) {
 			casilla.setMarcada(true);
 			respuesta = true;
 		}
@@ -77,5 +82,10 @@ public class Tablero {
 			respuesta = true;
 		}
 		return respuesta;
+	}
+
+	public boolean desvelarCasilla(Coordenada coordenada) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
