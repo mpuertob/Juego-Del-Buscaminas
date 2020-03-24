@@ -60,10 +60,6 @@ public class Tablero {
 		return getCasilla(posicion).isMina();
 	}
 
-	public Casilla[][] getCasillas() {
-		return casillas;
-	}
-
 	public boolean marcarCasilla(Coordenada coordenada) {
 		boolean respuesta = false;
 		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];

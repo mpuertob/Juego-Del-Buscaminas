@@ -83,17 +83,19 @@ class TableroTest {
 	@Test
 	void testTableroMarcarYDesmarcarCasilla() {
 		boolean marcada = false;
-		if (tablero.getCasillas()[0][2].isVelada()) {
+
+		if (tablero.getCasilla(new Coordenada(0, 2)).isVelada()) {
 			marcada = tablero.marcarCasilla(new Coordenada(0, 2));
 		}
 		assertTrue(marcada);
-		assertTrue(tablero.getCasillas()[0][2].isMarcada());
-		if (tablero.getCasillas()[0][2].isVelada() && tablero.getCasillas()[0][2].isMarcada()) {
+		assertTrue(tablero.getCasilla(new Coordenada(0, 2)).isMarcada());
+		if (tablero.getCasilla(new Coordenada(0, 2)).isVelada()
+				&& tablero.getCasilla(new Coordenada(0, 2)).isMarcada()) {
 			marcada = tablero.desmarcarCasilla(new Coordenada(0, 2));
 		}
 		assertTrue(marcada);
-		assertTrue(!tablero.getCasillas()[0][2].isMarcada());
-		tablero.getCasillas()[0][3].setVelada(false);
+		assertTrue(!tablero.getCasilla(new Coordenada(0, 2)).isMarcada());
+		tablero.getCasilla(new Coordenada(0, 3)).setVelada(false);
 		assertFalse(tablero.marcarCasilla(new Coordenada(0, 3)));
 	}
 }
