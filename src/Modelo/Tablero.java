@@ -12,7 +12,12 @@ public class Tablero {
 		colocarMinas(lado, numeroBombas);
 	}
 
-	private void establecerMinasAlrededor(Coordenada posicionMinaCoordenada, int lado) {
+	public Casilla[][] getCasillas() {
+		return casillas;
+	}
+
+	private void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
+		int lado=this.casillas.length;
 		int x = posicionMinaCoordenada.getPosX();
 		int y = posicionMinaCoordenada.getPosY();
 		for (int i = x - 1; i < x + 1; i++) {
@@ -37,7 +42,7 @@ public class Tablero {
 			if (!this.casillas[posicionAleatoriaX][posicionAleatoriaY].isMina()) {
 				this.casillas[posicionAleatoriaX][posicionAleatoriaY].setMina(true);
 				Coordenada posicionMinaCoordenada = new Coordenada(posicionAleatoriaX, posicionAleatoriaY);
-				establecerMinasAlrededor(posicionMinaCoordenada, lado);
+				establecerMinasAlrededor(posicionMinaCoordenada);
 				numeroBombas--;
 			} else {
 				posicionAleatoriaX = Utiles.dameNumero(lado);
