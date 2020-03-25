@@ -12,12 +12,7 @@ public class Tablero {
 		colocarMinas(lado, numeroBombas);
 	}
 
-	public Casilla[][] getCasillas() {
-		return casillas;
-	}
-
 	private void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
-		int lado=this.casillas.length;
 		int x = posicionMinaCoordenada.getPosX();
 		int y = posicionMinaCoordenada.getPosY();
 		for (int i = x - 1; i <= x + 1; i++) {
