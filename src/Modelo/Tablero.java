@@ -25,7 +25,7 @@ public class Tablero {
 				Coordenada alrededor = new Coordenada(i, j);
 				// No tengo en cuenta la posicion que estoy comprobando
 				if (!alrededor.equals(posicionMinaCoordenada)) {
-					if (isDentroLimites(alrededor, lado) && !this.getCasilla(alrededor).isMina()) {
+					if (isDentroLimites(alrededor) && !this.getCasilla(alrededor).isMina()) {
 						this.getCasilla(alrededor)
 								.setMinasAlrededor(this.getCasilla(alrededor).getMinasAlrededor() + 1);
 					}
@@ -99,7 +99,8 @@ public class Tablero {
 		return false;
 	}
 
-	private boolean isDentroLimites(Coordenada alrededor, int lado) {
+	private boolean isDentroLimites(Coordenada alrededor) {
+		int lado = this.casillas.length;
 		return alrededor.getPosX() >= 0 && alrededor.getPosX() < lado && alrededor.getPosY() >= 0
 				&& alrededor.getPosY() < lado;
 	}
