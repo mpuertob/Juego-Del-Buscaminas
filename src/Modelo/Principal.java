@@ -4,7 +4,7 @@ import utiles.Utiles;
 
 public class Principal {
 	public static void main(String[] args) {
-		int lado = 5;
+		int lado = 6;
 		int porcentaje = 20;
 		int minas = Utiles.calculaMinas(lado, porcentaje);
 		Tablero tablero = new Tablero(lado, minas);
@@ -19,7 +19,7 @@ public class Principal {
 			for (int j = 0; j < tablero.getCasillas()[i].length; j++) {
 				Coordenada coordenada = new Coordenada(i, j);
 				Casilla casilla = tablero.getCasilla(coordenada);
-				if (casilla.getMinasAlrededor()>0) {
+				if (casilla.getMinasAlrededor()>0&&!casilla.isMina()) {
 					System.out.println("Soy la i:" + i + " j:" + j+ " y tengo "+casilla.getMinasAlrededor()+" minas alrededor");
 				}
 			}
