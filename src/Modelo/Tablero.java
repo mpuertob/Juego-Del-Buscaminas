@@ -20,8 +20,8 @@ public class Tablero {
 		int lado=this.casillas.length;
 		int x = posicionMinaCoordenada.getPosX();
 		int y = posicionMinaCoordenada.getPosY();
-		for (int i = x - 1; i < x + 1; i++) {
-			for (int j = y - 1; j < y + 1; j++) {
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
 				Coordenada alrededor = new Coordenada(i, j);
 				// No tengo en cuenta la posicion que estoy comprobando
 				if (!alrededor.equals(posicionMinaCoordenada)) {

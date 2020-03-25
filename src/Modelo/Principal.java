@@ -5,7 +5,7 @@ import utiles.Utiles;
 public class Principal {
 	public static void main(String[] args) {
 		int lado = 5;
-		int porcentaje = 10;
+		int porcentaje = 20;
 		int minas = Utiles.calculaMinas(lado, porcentaje);
 		Tablero tablero = new Tablero(lado, minas);
 
