@@ -68,7 +68,6 @@ public class Tablero {
 	private boolean isMina(Coordenada posicion) {
 		return getCasilla(posicion).isMina();
 	}
-
 	public boolean marcarCasilla(Coordenada coordenada) {
 		boolean respuesta = false;
 		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];
@@ -78,13 +77,20 @@ public class Tablero {
 		}
 		return respuesta;
 	}
-
 	public boolean desmarcarCasilla(Coordenada coordenada) {
 		boolean respuesta = false;
 		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];
 		if (casilla.isVelada() && casilla.isMarcada()) {
 			casilla.setMarcada(false);
 			respuesta = true;
+		}
+		return respuesta;
+	}
+	public boolean conmutadorDeMarca(Coordenada coordenada) {
+		boolean respuesta = false;
+		respuesta=marcarCasilla(coordenada);
+		if (!respuesta) {
+			respuesta=desmarcarCasilla(coordenada);
 		}
 		return respuesta;
 	}
