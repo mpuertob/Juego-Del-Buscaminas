@@ -1,5 +1,8 @@
 package Modelo;
 
+import Modelo.Coordenada;
+import utiles.Utiles;
+
 public class Coordenada {
 	// clases de apoyo
 	private int posX, posY;
@@ -28,18 +31,19 @@ public class Coordenada {
 
 	@Override
 	public boolean equals(Object obj) {
-		boolean retorno = false;
-		if (this == obj) {
-			retorno = true;
+		boolean retorno=false;
+		if(obj!=null) {
+			retorno=this==obj;
+			if(!retorno && obj instanceof Coordenada) {
+				Coordenada coordenada=(Coordenada)obj;
+				retorno=this.getPosX()==coordenada.getPosX()&&this.getPosY()==coordenada.getPosY();
+			}
 		}
-		if (obj == null) {
-			retorno = false;
-		}
-		if (!(obj instanceof Coordenada)) {
-			retorno = false;
-		}
-		Coordenada coordenada = (Coordenada) obj;
-		retorno = (this.getPosX() == coordenada.getPosX() && this.getPosY() == coordenada.getPosY());
 		return retorno;
+	}
+	//Para probar el test de desvelarCasilla
+	public Coordenada creaCoordenadaAlrededor(int j2) {
+		int[] posicion = Utiles.damePosicionAlrededor(j2);
+		return new Coordenada(this.getPosX() + posicion[0], this.getPosY() + posicion[1]);
 	}
 }

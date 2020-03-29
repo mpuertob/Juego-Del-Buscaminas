@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Modelo.Casilla;
+import Modelo.Coordenada;
 import utiles.Utiles;
 
 class TableroTest {
@@ -35,7 +37,7 @@ class TableroTest {
 	}
 
 	@Test
-	void testDesvelarCasilla() {
+	void testDesvelarCasillaa() {
 		// Hay que probar que se desvela si no esta marcada
 		// Si hay 0 minas debe comenzar un proceso recursivo y
 		// debéis probar que desvela las casillas contiguas que tb
@@ -97,5 +99,55 @@ class TableroTest {
 		assertTrue(!tablero.getCasilla(new Coordenada(0, 2)).isMarcada());
 		tablero.getCasilla(new Coordenada(0, 3)).setVelada(false);
 		assertFalse(tablero.marcarCasilla(new Coordenada(0, 3)));
+	}
+
+	@Test
+	void testDesvelarCasilla() {
+		boolean error = false;
+		int i = 0, j = 0;
+		do {
+			do {
+				Coordenada posicion = new Coordenada(i, j);
+				Casilla actual = tablero.getCasilla(posicion);
+				tablero.mostrarTablero();
+				if (!actual.isMina() && actual.getMinasAlrededor() == 0 && actual.isVelada()) {
+					tablero.desvelarCasilla(posicion);
+					error = comprobarDesvelo();
+				}
+				tablero.mostrarTablero();
+			} while (++j < lado && !error);
+			j = 0;
+		} while (++i < lado && !error);
+		assertTrue(!error);
+	}
+
+	private boolean comprobarDesvelo() {
+		boolean error = false;
+		int i = 0, j = 0;
+		do {
+			do {
+				Coordenada posicion = new Coordenada(i, j);
+				Casilla actual = tablero.getCasilla(posicion);
+				if (actual.getMinasAlrededor() == 0 && !actual.isVelada()) {
+					error = desveladasAroundMe(posicion);
+				}
+			} while (++j < lado && !error);
+			j = 0;
+		} while (++i < lado && !error);
+		return error;
+	}
+
+	private boolean desveladasAroundMe(Coordenada posicion) {
+		boolean error = false;
+		for (int i = 0; i < 8 && !error; i++) {
+			Coordenada alrededor = posicion.creaCoordenadaAlrededor(i);
+			if (tablero.isDentroLimites(alrededor)) {
+				Casilla actual = tablero.getCasilla(alrededor);
+				if (!posicion.equals(actual)) {
+					error = actual.isVelada();
+				}
+			}
+		}
+		return error;
 	}
 }

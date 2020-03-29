@@ -99,7 +99,7 @@ public class Tablero {
 		return respuesta;
 	}
 
-	private boolean isDentroLimites(Coordenada alrededor) {
+	public boolean isDentroLimites(Coordenada alrededor) {
 		int lado = this.casillas.length;
 		return alrededor.getPosX() >= 0 && alrededor.getPosX() < lado && alrededor.getPosY() >= 0
 				&& alrededor.getPosY() < lado;
