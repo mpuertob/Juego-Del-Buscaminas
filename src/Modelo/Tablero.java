@@ -12,6 +12,10 @@ public class Tablero {
 		colocarMinas(lado, numeroBombas);
 	}
 
+	public Casilla[][] getCasillas() {
+		return casillas;
+	}
+
 	private void establecerMinasAlrededor(Coordenada posicionMinaCoordenada) {
 		int x = posicionMinaCoordenada.getPosX();
 		int y = posicionMinaCoordenada.getPosY();
@@ -68,41 +72,57 @@ public class Tablero {
 	private boolean isMina(Coordenada posicion) {
 		return getCasilla(posicion).isMina();
 	}
+
 	public boolean marcarCasilla(Coordenada coordenada) {
-		boolean respuesta = false;
-		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];
-		if (casilla.isVelada() && !casilla.isMarcada()) {
-			casilla.setMarcada(true);
-			respuesta = true;
-		}
-		return respuesta;
-	}
-	public boolean desmarcarCasilla(Coordenada coordenada) {
-		boolean respuesta = false;
-		Casilla casilla = this.casillas[coordenada.getPosX()][coordenada.getPosY()];
-		if (casilla.isVelada() && casilla.isMarcada()) {
-			casilla.setMarcada(false);
-			respuesta = true;
-		}
-		return respuesta;
-	}
-	public boolean conmutadorDeMarca(Coordenada coordenada) {
-		boolean respuesta = false;
-		respuesta=marcarCasilla(coordenada);
-		if (!respuesta) {
-			respuesta=desmarcarCasilla(coordenada);
-		}
-		return respuesta;
+		return getCasilla(coordenada).marcar();
 	}
 
 	public boolean desvelarCasilla(Coordenada coordenada) {
-		// TODO Auto-generated method stub
-		return false;
+		// CasoUno
+		boolean respuesta = false;
+		Casilla casilla = this.getCasilla(coordenada);
+		if (!casilla.isMarcada() && casilla.isVelada()) {
+			casilla.setVelada(false);
+			int x = coordenada.getPosX();
+			int y = coordenada.getPosY();
+			for (int i = x - 1; i <= x + 1; i++) {
+				for (int j = y - 1; j <= y + 1; j++) {
+					Coordenada coordenadaNueva = new Coordenada(i, j);
+					if (isDentroLimites(coordenadaNueva) && !casilla.equals(this.getCasilla(coordenadaNueva))
+							&& casilla.getMinasAlrededor() == 0) {
+						desvelarCasilla(coordenadaNueva);
+						respuesta = true;
+					}
+				}
+			}
+		}
+		return respuesta;
 	}
 
 	private boolean isDentroLimites(Coordenada alrededor) {
 		int lado = this.casillas.length;
 		return alrededor.getPosX() >= 0 && alrededor.getPosX() < lado && alrededor.getPosY() >= 0
 				&& alrededor.getPosY() < lado;
+	}
+
+	public void mostrarTablero() {
+		for (int i = 0; i < casillas.length; i++) {
+			System.out.println();
+			for (int j = 0; j < casillas[i].length; j++) {
+				Coordenada coordenada = new Coordenada(i, j);
+				Casilla casilla = this.getCasilla(coordenada);
+
+				if (casilla.isMina()) {
+					System.out.print("X \t");
+				} else if (casilla.isMarcada()) {
+					System.out.print("M \t");
+				} else if (!casilla.isVelada()) {
+					System.out.print(casilla.getMinasAlrededor() + " \t");
+				} else {
+					System.out.print("# \t");
+				}
+
+			}
+		}
 	}
 }

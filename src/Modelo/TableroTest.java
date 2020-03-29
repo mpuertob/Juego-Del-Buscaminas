@@ -91,7 +91,7 @@ class TableroTest {
 		assertTrue(tablero.getCasilla(new Coordenada(0, 2)).isMarcada());
 		if (tablero.getCasilla(new Coordenada(0, 2)).isVelada()
 				&& tablero.getCasilla(new Coordenada(0, 2)).isMarcada()) {
-			marcada = tablero.desmarcarCasilla(new Coordenada(0, 2));
+			marcada = tablero.marcarCasilla(new Coordenada(0, 2));
 		}
 		assertTrue(marcada);
 		assertTrue(!tablero.getCasilla(new Coordenada(0, 2)).isMarcada());

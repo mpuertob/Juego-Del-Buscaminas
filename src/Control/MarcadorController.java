@@ -3,11 +3,13 @@ package Control;
 import Modelo.Coordenada;
 import Modelo.Tablero;
 
-public class MarcadorController{
-	private Tablero tablero;
+public class MarcadorController {
 
-	public boolean conmutadorDeMarca(int x, int y) {
-		Coordenada coordenada = new Coordenada(x, y);
-		return tablero.conmutadorDeMarca(coordenada);
+	Tablero tablero;
+
+	// Sirve para marcar/desmarcar casillas
+	// Por lo tanto desaparece DesmarcadorController
+	public boolean marcarCasilla(Coordenada coord) {
+		return tablero.marcarCasilla(coord);
 	}
 }
