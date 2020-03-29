@@ -2,6 +2,7 @@ package Control;
 
 import Modelo.Coordenada;
 import Modelo.Tablero;
+import Vista.Botonera;
 
 public class MarcadorController {
 
@@ -9,7 +10,8 @@ public class MarcadorController {
 
 	// Sirve para marcar/desmarcar casillas
 	// Por lo tanto desaparece DesmarcadorController
-	public boolean marcarCasilla(Coordenada coord) {
-		return tablero.marcarCasilla(coord);
+	public boolean marcarCasilla(String name) {
+		Coordenada coordenada = Botonera.obtenCoordenada(name);
+		return tablero.marcarCasilla(coordenada);
 	}
 }

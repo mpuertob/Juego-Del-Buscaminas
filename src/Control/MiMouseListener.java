@@ -12,10 +12,12 @@ import Vista.Botonera;
 
 public class MiMouseListener extends MouseAdapter {
 	private DesveladorController desveladorController;
+	private MarcadorController marcadorController;
 
-	public MiMouseListener(DesveladorController desveladorController) {
+	public MiMouseListener(DesveladorController desveladorController, MarcadorController marcadorController) {
 		super();
 		this.desveladorController = desveladorController;
+		this.marcadorController = marcadorController;
 	}
 
 	@Override
@@ -28,6 +30,7 @@ public class MiMouseListener extends MouseAdapter {
 		}
 		if (SwingUtilities.isRightMouseButton(e)) {
 			// queremos marcar
+			marcadorController.marcarCasilla(boton.getName());
 		}
 		Botonera botonera = ((Botonera) boton.getParent());
 		botonera.actualizaBotonera(desveladorController.getEntornoGrafico());

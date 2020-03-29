@@ -12,6 +12,7 @@ public class ParaUI extends UserInterface {
 	DesveladorController desveladorController;
 	Tablero tablero;
 	MiMouseListener miMouseListener;
+	MarcadorController marcadorController;
 
 	public ParaUI() {
 		btnReiniciar.addActionListener(new ActionListener() {
@@ -33,7 +34,8 @@ public class ParaUI extends UserInterface {
 		int lado = getDificultad().getLado();
 		tablero = new Tablero(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
 		desveladorController = new DesveladorController(tablero);
-		miMouseListener = new MiMouseListener(desveladorController);
+		marcadorController = new MarcadorController();
+		miMouseListener = new MiMouseListener(desveladorController, marcadorController);
 		Botonera botonera = new Botonera(lado, miMouseListener);
 
 		// La parte del UI
