@@ -2,18 +2,39 @@ package Vista;
 
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
-import Control.MiMouseListener;
+import Control.DesveladorController;
 import Modelo.Coordenada;
+import Vista.ElementoGrafico;
 
 public class Botonera extends JPanel {
-	MiMouseListener miListener;
+	DesveladorController desveladorController;
 
-	public Botonera(int lado, MiMouseListener miListener) {
-		this.miListener = miListener;
+	MouseAdapter miMouseAdapter = new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			super.mouseClicked(e);
+			JButton boton = ((JButton) e.getSource());
+
+			if (SwingUtilities.isLeftMouseButton(e)) {
+				desveladorController.desvelarCasilla(boton.getName());
+			}
+			if (SwingUtilities.isRightMouseButton(e)) {
+				// queremos marcar
+			}
+			// Al estar dentro de la botonera (el objeto)
+			actualizaBotonera(desveladorController.getEntornoGrafico());
+		}
+	};
+
+	public Botonera(int lado, DesveladorController desveladorController) {
+		this.desveladorController = desveladorController;
 		// TODO el nombre para cuando hay mas de 10 de lado.
 		// debe ser de dos digitos por coordenada aunque el valor<10
 		// es decir la coordenada 6:11 debe ser 06:11, por ejemplo.
@@ -24,7 +45,8 @@ public class Botonera extends JPanel {
 				String nombre = Integer.toString(filas) + Integer.toString(columnas);
 				boton.setName(nombre);
 				add(boton);
-				boton.addMouseListener(miListener);
+				// Esta linea ahora usar el adapter interno
+				boton.addMouseListener(miMouseAdapter);
 			}
 		}
 	}

@@ -11,7 +11,6 @@ import Vista.UserInterface;
 public class ParaUI extends UserInterface {
 	DesveladorController desveladorController;
 	Tablero tablero;
-	MiMouseListener miMouseListener;
 	MarcadorController marcadorController;
 
 	public ParaUI() {
@@ -35,8 +34,7 @@ public class ParaUI extends UserInterface {
 		tablero = new Tablero(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
 		desveladorController = new DesveladorController(tablero);
 		marcadorController = new MarcadorController();
-		miMouseListener = new MiMouseListener(desveladorController, marcadorController);
-		Botonera botonera = new Botonera(lado, miMouseListener);
+		Botonera botonera = new Botonera(lado, desveladorController);
 
 		// La parte del UI
 		getHuecoBotonera().removeAll();
