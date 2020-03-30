@@ -6,7 +6,12 @@ import Vista.Botonera;
 
 public class MarcadorController {
 
-	Tablero tablero;
+	private Tablero tablero;
+
+	public MarcadorController(Tablero tablero) {
+		super();
+		this.tablero = tablero;
+	}
 
 	// Sirve para marcar/desmarcar casillas
 	// Por lo tanto desaparece DesmarcadorController
