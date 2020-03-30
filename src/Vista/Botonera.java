@@ -37,18 +37,32 @@ public class Botonera extends JPanel {
 	public Botonera(int lado, DesveladorController desveladorController, MarcadorController marcadorController) {
 		this.desveladorController = desveladorController;
 		this.marcadorController = marcadorController;
-		// TODO el nombre para cuando hay mas de 10 de lado.
-		// debe ser de dos digitos por coordenada aunque el valor<10
-		// es decir la coordenada 6:11 debe ser 06:11, por ejemplo.
 		setLayout(new GridLayout(lado, lado, 0, 0));
 		for (int filas = 0; filas < lado; filas++) {
 			for (int columnas = 0; columnas < lado; columnas++) {
 				JButton boton = new JButton();
-				String nombre = Integer.toString(filas) + Integer.toString(columnas);
-				boton.setName(nombre);
+				asignarNombreAlBoton(filas, columnas, boton);
 				add(boton);
 				// Esta linea ahora usar el adapter interno
 				boton.addMouseListener(miMouseAdapter);
+			}
+		}
+	}
+
+	private void asignarNombreAlBoton(int filas, int columnas, JButton boton) {
+		int limite = 10;
+		String nombre;
+		if (filas < limite && columnas < limite) {
+			nombre = Integer.toString(filas) + Integer.toString(columnas);
+			boton.setName(nombre);
+
+		} else {
+			if (filas >= limite && columnas < limite) {
+				nombre = Integer.toString(filas) + "0" + Integer.toString(columnas);
+				boton.setName(nombre);
+			} else if (filas < limite && columnas >= limite) {
+				nombre = "0" + Integer.toString(filas) + Integer.toString(columnas);
+				boton.setName(nombre);
 			}
 		}
 	}
@@ -70,9 +84,16 @@ public class Botonera extends JPanel {
 	}
 
 	public static Coordenada obtenCoordenada(String name) {
-		int pos = name.length() / 2;
-		return new Coordenada(Integer.valueOf(name.substring(0, pos)),
-				Integer.valueOf(name.substring(pos, name.length())));
+		boolean isPar = name.length() % 2 == 0;
+		Coordenada coordenada;
+		if (isPar) {
+			int pos = name.length() / 2;
+			coordenada = new Coordenada(Integer.valueOf(name.substring(0, pos)),
+					Integer.valueOf(name.substring(pos, name.length())));
+		} else {
+			coordenada = null;
+		}
+		return coordenada;
 	}
 
 }
