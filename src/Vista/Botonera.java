@@ -57,11 +57,12 @@ public class Botonera extends JPanel {
 			boton.setName(nombre);
 
 		} else {
+			String cero = "0";
 			if (filas >= limite && columnas < limite) {
-				nombre = Integer.toString(filas) + "0" + Integer.toString(columnas);
+				nombre = Integer.toString(filas) + cero + Integer.toString(columnas);
 				boton.setName(nombre);
 			} else if (filas < limite && columnas >= limite) {
-				nombre = "0" + Integer.toString(filas) + Integer.toString(columnas);
+				nombre = cero + Integer.toString(filas) + Integer.toString(columnas);
 				boton.setName(nombre);
 			}
 		}
