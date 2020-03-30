@@ -34,7 +34,7 @@ public class ParaUI extends UserInterface {
 		tablero = new Tablero(lado, Utiles.calculaMinas(lado, getDensidad().getPorcentaje()));
 		desveladorController = new DesveladorController(tablero);
 		marcadorController = new MarcadorController();
-		Botonera botonera = new Botonera(lado, desveladorController);
+		Botonera botonera = new Botonera(lado, desveladorController, marcadorController);
 
 		// La parte del UI
 		getHuecoBotonera().removeAll();

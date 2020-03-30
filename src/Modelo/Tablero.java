@@ -74,7 +74,8 @@ public class Tablero {
 	}
 
 	public boolean marcarCasilla(Coordenada coordenada) {
-		return getCasilla(coordenada).marcar();
+		Casilla casilla = getCasilla(coordenada);
+		return casilla.marcar();
 	}
 
 	public boolean desvelarCasilla(Coordenada coordenada) {

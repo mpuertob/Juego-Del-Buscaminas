@@ -10,12 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import Control.DesveladorController;
+import Control.MarcadorController;
 import Modelo.Coordenada;
 import Vista.ElementoGrafico;
 
 public class Botonera extends JPanel {
 	DesveladorController desveladorController;
-
+	MarcadorController marcadorController;
 	MouseAdapter miMouseAdapter = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -26,15 +27,16 @@ public class Botonera extends JPanel {
 				desveladorController.desvelarCasilla(boton.getName());
 			}
 			if (SwingUtilities.isRightMouseButton(e)) {
-				// queremos marcar
+				marcadorController.marcarCasilla(boton.getName());
 			}
 			// Al estar dentro de la botonera (el objeto)
 			actualizaBotonera(desveladorController.getEntornoGrafico());
 		}
 	};
 
-	public Botonera(int lado, DesveladorController desveladorController) {
+	public Botonera(int lado, DesveladorController desveladorController, MarcadorController marcadorController) {
 		this.desveladorController = desveladorController;
+		this.marcadorController = marcadorController;
 		// TODO el nombre para cuando hay mas de 10 de lado.
 		// debe ser de dos digitos por coordenada aunque el valor<10
 		// es decir la coordenada 6:11 debe ser 06:11, por ejemplo.
