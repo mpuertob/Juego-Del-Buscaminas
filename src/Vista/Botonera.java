@@ -74,9 +74,11 @@ public class Botonera extends JPanel {
 			JButton boton = (JButton) components[i];
 			Coordenada coordenada = obtenCoordenada(boton.getName());
 			ElementoGrafico elementoGrafico = elementos[coordenada.getPosX()][coordenada.getPosY()];
-			if (!elementoGrafico.isOcultado()) {
+			if (!elementoGrafico.isOcultado()&&!elementoGrafico.isMina()) {
 				boton.setText(String.valueOf(elementoGrafico.getValor()));
-			} else if (elementoGrafico.isSenalada()) {
+			} else if (!elementoGrafico.isOcultado()&&elementoGrafico.isMina()) {
+				boton.setText("M");
+			}else if (elementoGrafico.isSenalada()) {
 				boton.setText("X");
 			} else {
 				boton.setText("");

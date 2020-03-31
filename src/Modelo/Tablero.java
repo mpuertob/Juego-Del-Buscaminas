@@ -79,13 +79,22 @@ public class Tablero {
 	}
 
 	public boolean desvelarCasilla(Coordenada coordenada) {
-		// CasoUno
+		// CasoUno desvelar casillas veladas
 		boolean respuesta = false;
+		respuesta = procesoRecursivoDesvelarCasillasVeladas(coordenada, respuesta);
+		// caso dos desvelar casillas que coincide el numero de marcadas con el numero
+		// de minas
+		respuesta = procesoRecursivoDesvelarCasillasQueCoincideMarcadasConMinas(coordenada, respuesta);
+
+		return respuesta;
+	}
+
+	private boolean procesoRecursivoDesvelarCasillasVeladas(Coordenada coordenada, boolean respuesta) {
 		Casilla casilla = this.getCasilla(coordenada);
+		int x = coordenada.getPosX();
+		int y = coordenada.getPosY();
 		if (!casilla.isMarcada() && casilla.isVelada()) {
 			casilla.setVelada(false);
-			int x = coordenada.getPosX();
-			int y = coordenada.getPosY();
 			for (int i = x - 1; i <= x + 1; i++) {
 				for (int j = y - 1; j <= y + 1; j++) {
 					Coordenada coordenadaNueva = new Coordenada(i, j);
@@ -93,6 +102,55 @@ public class Tablero {
 							&& casilla.getMinasAlrededor() == 0) {
 						desvelarCasilla(coordenadaNueva);
 						respuesta = true;
+					}
+				}
+			}
+		}
+		return respuesta;
+	}
+
+	private boolean procesoRecursivoDesvelarCasillasQueCoincideMarcadasConMinas(Coordenada coordenada,
+			boolean respuesta) {
+		Casilla casilla = this.getCasilla(coordenada);
+		int x = coordenada.getPosX();
+		int y = coordenada.getPosY();
+		if (respuesta == false && !casilla.isMarcada() && !casilla.isVelada()) {
+			// Contar minas
+			int numeroDeMinasAlrededor = casilla.getMinasAlrededor();
+			// Contar marcadas
+			int numeroCasillasMarcadas = 0;
+			x = coordenada.getPosX();
+			y = coordenada.getPosY();
+			for (int i = x - 1; i <= x + 1; i++) {
+				for (int j = y - 1; j <= y + 1; j++) {
+					Coordenada coordenadaAComprobar = new Coordenada(i, j);
+					boolean dentroLimites = isDentroLimites(coordenadaAComprobar);
+					if (dentroLimites) {
+						Casilla casillaComprobar = this.getCasilla(coordenadaAComprobar);
+						boolean isMismaCasilla = !casilla.equals(casillaComprobar);
+						boolean isMarcada = casillaComprobar.isMarcada();
+						if (dentroLimites && isMismaCasilla && isMarcada) {
+							numeroCasillasMarcadas++;
+						}
+					}
+				}
+			}
+			// Comprobar si son el mismo numero de minas que de marcadas
+			if (numeroDeMinasAlrededor == numeroCasillasMarcadas) {
+				// Desvelar todas las casillas
+				for (int i = x - 1; i <= x + 1; i++) {
+					for (int j = y - 1; j <= y + 1; j++) {
+						Coordenada coordenadaAComprobar = new Coordenada(i, j);
+						boolean dentroLimites = isDentroLimites(coordenadaAComprobar);
+						if (dentroLimites) {
+							Casilla casillaComprobar = this.getCasilla(coordenadaAComprobar);
+							boolean isMismaCasilla = !casilla.equals(casillaComprobar);
+							if (dentroLimites && isMismaCasilla && casillaComprobar.isVelada()) {
+								casillaComprobar.setVelada(false);
+								respuesta = true;
+							}
+
+						}
 					}
 				}
 			}
@@ -115,7 +173,7 @@ public class Tablero {
 
 				if (casilla.isMina()) {
 					System.out.print("X \t");
-				} else if (casilla.isMarcada()) {
+				} else if (casilla.isMarcada() && !casilla.isVelada()) {
 					System.out.print("M \t");
 				} else if (!casilla.isVelada()) {
 					System.out.print(casilla.getMinasAlrededor() + " \t");
