@@ -41,7 +41,7 @@ public class Botonera extends JPanel {
 		for (int filas = 0; filas < lado; filas++) {
 			for (int columnas = 0; columnas < lado; columnas++) {
 				JButton boton = new JButton();
-				asignarNombreAlBoton(filas, columnas, boton);
+				boton.setName(asignarNombreAlBoton(filas, columnas));
 				add(boton);
 				// Esta linea ahora usar el adapter interno
 				boton.addMouseListener(miMouseAdapter);
@@ -49,23 +49,23 @@ public class Botonera extends JPanel {
 		}
 	}
 
-	private void asignarNombreAlBoton(int filas, int columnas, JButton boton) {
+	private String asignarNombreAlBoton(int filas, int columnas) {
 		int limite = 10;
-		String nombre;
-		if (filas < limite && columnas < limite) {
-			nombre = Integer.toString(filas) + Integer.toString(columnas);
-			boton.setName(nombre);
-
-		} else {
-			String cero = "0";
-			if (filas >= limite && columnas < limite) {
-				nombre = Integer.toString(filas) + cero + Integer.toString(columnas);
-				boton.setName(nombre);
-			} else if (filas < limite && columnas >= limite) {
-				nombre = cero + Integer.toString(filas) + Integer.toString(columnas);
-				boton.setName(nombre);
+		String nombre = String.valueOf(filas) + String.valueOf(columnas);
+		boolean isPar = nombre.length() / 2 == 0;
+		if (!isPar) {
+			if (filas < limite && columnas < limite) {
+				nombre = Integer.toString(filas) + Integer.toString(columnas);
+			} else {
+				String cero = "0";
+				if (filas >= limite && columnas < limite) {
+					nombre = Integer.toString(filas) + cero + Integer.toString(columnas);
+				} else if (filas < limite && columnas >= limite) {
+					nombre = cero + Integer.toString(filas) + Integer.toString(columnas);
+				}
 			}
 		}
+		return nombre;
 	}
 
 	public void actualizaBotonera(ElementoGrafico[][] elementos) {
@@ -74,11 +74,11 @@ public class Botonera extends JPanel {
 			JButton boton = (JButton) components[i];
 			Coordenada coordenada = obtenCoordenada(boton.getName());
 			ElementoGrafico elementoGrafico = elementos[coordenada.getPosX()][coordenada.getPosY()];
-			if (!elementoGrafico.isOcultado()&&!elementoGrafico.isMina()) {
+			if (!elementoGrafico.isOcultado() && !elementoGrafico.isMina()) {
 				boton.setText(String.valueOf(elementoGrafico.getValor()));
-			} else if (!elementoGrafico.isOcultado()&&elementoGrafico.isMina()) {
+			} else if (!elementoGrafico.isOcultado() && elementoGrafico.isMina()) {
 				boton.setText("M");
-			}else if (elementoGrafico.isSenalada()) {
+			} else if (elementoGrafico.isSenalada()) {
 				boton.setText("X");
 			} else {
 				boton.setText("");
@@ -87,15 +87,9 @@ public class Botonera extends JPanel {
 	}
 
 	public static Coordenada obtenCoordenada(String name) {
-		boolean isPar = name.length() % 2 == 0;
-		Coordenada coordenada;
-		if (isPar) {
-			int pos = name.length() / 2;
-			coordenada = new Coordenada(Integer.valueOf(name.substring(0, pos)),
-					Integer.valueOf(name.substring(pos, name.length())));
-		} else {
-			coordenada = null;
-		}
+		int pos = name.length() / 2;
+		Coordenada coordenada = new Coordenada(Integer.valueOf(name.substring(0, pos)),
+				Integer.valueOf(name.substring(pos, name.length())));
 		return coordenada;
 	}
 
