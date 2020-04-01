@@ -22,7 +22,6 @@ public class Botonera extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			super.mouseClicked(e);
 			JButton boton = ((JButton) e.getSource());
-
 			if (SwingUtilities.isLeftMouseButton(e)) {
 				desveladorController.desvelarCasilla(boton.getName());
 			}
