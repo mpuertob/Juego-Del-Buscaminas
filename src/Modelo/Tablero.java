@@ -177,4 +177,26 @@ public class Tablero {
 			}
 		}
 	}
+
+	public boolean isPartidaPerdida() {
+		boolean respuesta = false;
+		int limite = this.getCasillas().length;
+		for (int i = 0; i < limite; i++) {
+			for (int j = 0; j < limite; j++) {
+				Coordenada coordenada = new Coordenada(i, j);
+				if (this.getCasilla(coordenada).isMina() && !this.getCasilla(coordenada).isVelada()) {
+					respuesta = true;
+				}
+			}
+		}
+		if (respuesta) {
+			for (int i = 0; i < limite; i++) {
+				for (int j = 0; j < limite; j++) {
+					Coordenada coordenada = new Coordenada(i, j);
+					this.getCasilla(coordenada).setVelada(false);
+				}
+			}
+		}
+		return respuesta;
+	}
 }

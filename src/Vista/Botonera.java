@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 import Control.DesveladorController;
 import Control.MarcadorController;
 import Modelo.Coordenada;
+import Modelo.Tablero;
 import Vista.ElementoGrafico;
 
 public class Botonera extends JPanel {
@@ -28,8 +29,12 @@ public class Botonera extends JPanel {
 			if (SwingUtilities.isRightMouseButton(e)) {
 				marcadorController.marcarCasilla(boton.getName());
 			}
-			// Al estar dentro de la botonera (el objeto)
-			actualizaBotonera(desveladorController.getEntornoGrafico());
+			if (desveladorController.getTablero().isPartidaPerdida()) {
+				DesvelarBotonera(desveladorController.getEntornoGrafico());
+			} else {
+				// Al estar dentro de la botonera (el objeto)
+				actualizaBotonera(desveladorController.getEntornoGrafico());
+			}
 		}
 	};
 
@@ -82,6 +87,21 @@ public class Botonera extends JPanel {
 			} else {
 				boton.setText("");
 			}
+		}
+	}
+
+	public void DesvelarBotonera(ElementoGrafico[][] elementos) {
+		Component[] components = getComponents();
+		for (int i = 0; i < components.length; i++) {
+			JButton boton = (JButton) components[i];
+			Coordenada coordenada = obtenCoordenada(boton.getName());
+			ElementoGrafico elementoGrafico = elementos[coordenada.getPosX()][coordenada.getPosY()];
+			if (elementoGrafico.isMina()) {
+				boton.setText("M");
+			} else {
+				boton.setText(String.valueOf(elementoGrafico.getValor()));
+			}
+			boton.setEnabled(false);
 		}
 	}
 
