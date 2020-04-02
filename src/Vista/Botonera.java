@@ -1,5 +1,6 @@
 package Vista;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -29,8 +30,12 @@ public class Botonera extends JPanel {
 			if (SwingUtilities.isRightMouseButton(e)) {
 				marcadorController.marcarCasilla(boton.getName());
 			}
-			if (desveladorController.getTablero().isPartidaPerdida()) {
-				DesvelarBotonera(desveladorController.getEntornoGrafico());
+			boolean ganado = false;
+			if (desveladorController.getTablero().isPartidaGanada()) {
+				ganado = true;
+				DesvelarBotonera(desveladorController.getEntornoGrafico(), ganado);
+			} else if (desveladorController.getTablero().isPartidaPerdida()) {
+				DesvelarBotonera(desveladorController.getEntornoGrafico(), ganado);
 			} else {
 				// Al estar dentro de la botonera (el objeto)
 				actualizaBotonera(desveladorController.getEntornoGrafico());
@@ -90,18 +95,28 @@ public class Botonera extends JPanel {
 		}
 	}
 
-	public void DesvelarBotonera(ElementoGrafico[][] elementos) {
+	public void DesvelarBotonera(ElementoGrafico[][] elementos, boolean ganado) {
 		Component[] components = getComponents();
 		for (int i = 0; i < components.length; i++) {
 			JButton boton = (JButton) components[i];
 			Coordenada coordenada = obtenCoordenada(boton.getName());
 			ElementoGrafico elementoGrafico = elementos[coordenada.getPosX()][coordenada.getPosY()];
-			if (elementoGrafico.isMina()) {
-				boton.setText("M");
+			if (!ganado) {
+				if (elementoGrafico.isMina()) {
+					boton.setText("M");
+					boton.setBackground(Color.RED);
+				} else {
+					boton.setText(String.valueOf(elementoGrafico.getValor()));
+				}
 			} else {
-				boton.setText(String.valueOf(elementoGrafico.getValor()));
+				if (!elementoGrafico.isMina() && !elementoGrafico.isOcultado()) {
+					boton.setText(String.valueOf(elementoGrafico.getValor()));
+				} else {
+					boton.setBackground(Color.GREEN);
+				}
 			}
 			boton.setEnabled(false);
+
 		}
 	}
 

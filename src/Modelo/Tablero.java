@@ -163,7 +163,6 @@ public class Tablero {
 			for (int j = 0; j < casillas[i].length; j++) {
 				Coordenada coordenada = new Coordenada(i, j);
 				Casilla casilla = this.getCasilla(coordenada);
-
 				if (casilla.isMina()) {
 					System.out.print("X \t");
 				} else if (casilla.isMarcada() && !casilla.isVelada()) {
@@ -176,6 +175,28 @@ public class Tablero {
 
 			}
 		}
+	}
+
+	public boolean isPartidaGanada() {
+		boolean respuesta = false;
+		int numeroTotalDeCasillas = this.casillas.length * this.casillas.length;
+		int numeroTotalDeMinas = 0;
+		int numeroTotalDeCasillasDesveladas = 0;
+		for (int i = 0; i < this.casillas.length; i++) {
+			for (int j = 0; j < casillas.length; j++) {
+				Coordenada coordenada = new Coordenada(i, j);
+				Casilla casilla = this.getCasilla(coordenada);
+				if (casilla.isMina()) {
+					numeroTotalDeMinas++;
+				} else if (!casilla.isMina() && !casilla.isVelada()) {
+					numeroTotalDeCasillasDesveladas++;
+				}
+			}
+		}
+		if (numeroTotalDeCasillas - numeroTotalDeMinas == numeroTotalDeCasillasDesveladas) {
+			respuesta = true;
+		}
+		return respuesta;
 	}
 
 	public boolean isPartidaPerdida() {
