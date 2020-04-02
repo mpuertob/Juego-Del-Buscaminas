@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -34,8 +35,11 @@ public class Botonera extends JPanel {
 			if (desveladorController.getTablero().isPartidaGanada()) {
 				ganado = true;
 				DesvelarBotonera(desveladorController.getEntornoGrafico(), ganado);
+				JOptionPane.showMessageDialog(null, "Has Ganado Máquina");
 			} else if (desveladorController.getTablero().isPartidaPerdida()) {
 				DesvelarBotonera(desveladorController.getEntornoGrafico(), ganado);
+				JOptionPane.showMessageDialog(null, "Has Perdido Máquina");
+
 			} else {
 				// Al estar dentro de la botonera (el objeto)
 				actualizaBotonera(desveladorController.getEntornoGrafico());
