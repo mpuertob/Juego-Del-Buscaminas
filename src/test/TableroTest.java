@@ -1,4 +1,4 @@
-package Modelo;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import Modelo.Casilla;
 import Modelo.Coordenada;
+import Modelo.Tablero;
 import utiles.Utiles;
 
 class TableroTest {

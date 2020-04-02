@@ -1,7 +1,9 @@
-package Modelo;
+package test;
 
 import java.util.Scanner;
 
+import Modelo.Coordenada;
+import Modelo.Tablero;
 import utiles.Utiles;
 
 public class PruebaMainDesvelarCasillas {
