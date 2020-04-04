@@ -2,6 +2,7 @@ package Vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,9 +46,10 @@ public class UserInterface extends JFrame {
 	 * Create the frame.
 	 */
 	public UserInterface() {
-		setTitle("Busca Minas");
+		setTitle("Buscaminas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 530, 300);
+		Dimension minimumSize= new Dimension(600, 400);
+		setMinimumSize(minimumSize);
 		setLocationRelativeTo(null);
 
 		menuBar = new JMenuBar();
