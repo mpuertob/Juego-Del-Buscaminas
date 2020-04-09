@@ -80,13 +80,13 @@ public class Tablero {
 
 	public void desvelarCasilla(Coordenada coordenada) {
 		// CasoUno desvelar casillas veladas
-		procesoRecursivoDesvelarCasillasVeladas(coordenada);
+		desvelarCasillasVeladas(coordenada);
 		// caso dos desvelar casillas que coincide el numero de marcadas con el numero
 		// de minas
-		procesoRecursivoDesvelarCasillasQueCoincideMarcadasConMinas(coordenada);
+		desvelarCasillasDesveladas(coordenada);
 	}
 
-	private void procesoRecursivoDesvelarCasillasVeladas(Coordenada coordenada) {
+	private void desvelarCasillasVeladas(Coordenada coordenada) {
 		Casilla casilla = this.getCasilla(coordenada);
 		int x = coordenada.getPosX();
 		int y = coordenada.getPosY();
@@ -104,7 +104,7 @@ public class Tablero {
 		}
 	}
 
-	private void procesoRecursivoDesvelarCasillasQueCoincideMarcadasConMinas(Coordenada coordenada) {
+	private void desvelarCasillasDesveladas(Coordenada coordenada) {
 		Casilla casilla = this.getCasilla(coordenada);
 		int x = coordenada.getPosX();
 		int y = coordenada.getPosY();
