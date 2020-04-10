@@ -108,22 +108,24 @@ public class Tablero {
 		Casilla casilla = this.getCasilla(coordenada);
 		int x = coordenada.getPosX();
 		int y = coordenada.getPosY();
-		int numeroDeMinasAlrededor = casilla.getMinasAlrededor();
-		// Contar marcadas
-		int numeroCasillasMarcadas = contarMarcadas(casilla, x, y);
-		if (numeroDeMinasAlrededor > 0 && numeroCasillasMarcadas > 0 && !casilla.isVelada()) {
-			// Comprobar si son el mismo numero de minas que de marcadas
-			if (numeroDeMinasAlrededor == numeroCasillasMarcadas) {
-				// Desvelar todas las casillas
-				for (int i = x - 1; i <= x + 1; i++) {
-					for (int j = y - 1; j <= y + 1; j++) {
-						Coordenada coordenadaAComprobar = new Coordenada(i, j);
-						boolean dentroLimites = isDentroLimites(coordenadaAComprobar);
-						if (dentroLimites) {
-							Casilla casillaComprobar = this.getCasilla(coordenadaAComprobar);
-							boolean isMismaCasilla = !casilla.equals(casillaComprobar);
-							if (dentroLimites && isMismaCasilla && casillaComprobar.isVelada()) {
-								casillaComprobar.setVelada(false);
+		if (!casilla.isVelada() && !casilla.isMarcada()) {
+			int numeroDeMinasAlrededor = casilla.getMinasAlrededor();
+			// Contar marcadas
+			int numeroCasillasMarcadas = contarMarcadas(casilla, x, y);
+			if (numeroDeMinasAlrededor > 0 && numeroCasillasMarcadas > 0 && !casilla.isVelada()) {
+				// Comprobar si son el mismo numero de minas que de marcadas
+				if (numeroDeMinasAlrededor == numeroCasillasMarcadas) {
+					// Desvelar todas las casillas
+					for (int i = x - 1; i <= x + 1; i++) {
+						for (int j = y - 1; j <= y + 1; j++) {
+							Coordenada coordenadaAComprobar = new Coordenada(i, j);
+							boolean dentroLimites = isDentroLimites(coordenadaAComprobar);
+							if (dentroLimites) {
+								Casilla casillaComprobar = this.getCasilla(coordenadaAComprobar);
+								boolean isMismaCasilla = !casilla.equals(casillaComprobar);
+								if (dentroLimites && isMismaCasilla && casillaComprobar.isVelada()) {
+									desvelarCasilla(coordenadaAComprobar);
+								}
 							}
 						}
 					}
