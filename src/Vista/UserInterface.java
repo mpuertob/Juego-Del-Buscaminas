@@ -46,7 +46,7 @@ public class UserInterface extends JFrame {
 	 * Create the frame.
 	 */
 	public UserInterface() {
-		setTitle("Buscaminas");
+		setTitle("BuscaminasMarcos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension minimumSize= new Dimension(600, 400);
 		setMinimumSize(minimumSize);
